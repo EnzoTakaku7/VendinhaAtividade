@@ -25,3 +25,7 @@ ADD COLUMN data_pagamento TIMESTAMP;
 CREATE UNIQUE INDEX ind_divida_aberta
 ON divida (cliente_id)
 WHERE paga = FALSE;
+
+SELECT *
+FROM cliente
+ORDER BY id DESC;
