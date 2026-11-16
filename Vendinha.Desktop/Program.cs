@@ -3,6 +3,7 @@ using Vendinha.Dados.Conexao;
 using Npgsql;
 using Vendinha.Dados.Repositorios;
 using Vendinha.Negocio;
+using Vendinha.Dados.Serviços;
 
 namespace Vendinha.Desktop
 {
@@ -26,6 +27,9 @@ namespace Vendinha.Desktop
                 return;
                     
             }
+            
+            ClienteSevice service;
+
             try
             {
                 var conexao = new ConexaoPostgres(connectionString);
@@ -33,6 +37,8 @@ namespace Vendinha.Desktop
                 {
                     teste.Open();
                 }
+                var repositorio = new ClienteRepositorio(conexao);
+                service = new ClienteSevice(repositorio);
             }
 
             catch (Exception ex)

@@ -8,7 +8,7 @@ using Vendinha.Dados.Repositorios;
 using Vendinha.Negocio;
 namespace Vendinha.Dados.Serviços
 {
-    internal class ClienteSevice
+    public class ClienteSevice
     {
         private ClienteRepositorio repositorio;
 
