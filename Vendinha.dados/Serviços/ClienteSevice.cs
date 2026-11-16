@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Vendinha.Dados.Repositorios;
 using Vendinha.Negocio;
+
+
 namespace Vendinha.Dados.Serviços
 {
     public class ClienteSevice
@@ -113,6 +115,27 @@ namespace Vendinha.Dados.Serviços
             repositorio.Cadastrar(cliente);
             return true;
         }
-    }
 
+        public List<Cliente> Consultar()
+        {
+            return repositorio.Consultar();
+        }
+
+        public List<Cliente> Consultar(string pesquisa)
+        {
+            var clientes = Consultar();
+            var resultado = new List<Cliente>();
+
+            foreach (var cliente in clientes)
+            {
+                if (cliente.NomeCompleto.Contains(pesquisa, StringComparison.OrdinalIgnoreCase))
+                {
+                    resultado.Add(cliente);
+                }
+            }
+            return resultado;
+        }
+
+    }
+        
 }

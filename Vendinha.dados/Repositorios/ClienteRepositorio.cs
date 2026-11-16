@@ -34,5 +34,36 @@ namespace Vendinha.Dados.Repositorios
 
         comando.ExecuteNonQuery();
         }
+
+        public List<Cliente> Consultar() {
+            
+            var resultado = new List<Cliente>();
+
+            using NpgsqlConnection conexao = _conexaoPostgres.ObterConexao();
+            conexao.Open();
+
+            string sql = @"SELECT id, nome_completo, cpf, data_nascimento, email FROM cliente ORDER BY nome_completo";
+            
+            using NpgsqlCommand comando = new NpgsqlCommand(sql, conexao);
+            using NpgsqlDataReader leitor = comando.ExecuteReader();
+
+            while (leitor.Read())
+            {
+                var cliente = new Cliente(
+                    leitor.GetString(1),
+                    leitor.GetString(2),
+                    leitor.GetDateTime(3)
+                );
+                cliente.Id = leitor.GetInt32(0);
+                
+                if (!leitor.IsDBNull(4))
+                {
+                    cliente.Email = leitor.GetString(4);
+                }
+                resultado.Add(cliente);
+            }
+
+            return resultado;    
+        }
     }
 }

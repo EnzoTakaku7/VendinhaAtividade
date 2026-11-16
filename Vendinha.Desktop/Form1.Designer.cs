@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             btnAbrirCadastro = new Button();
+            btnAbrirListagem = new Button();
             SuspendLayout();
             // 
             // btnAbrirCadastro
@@ -41,11 +42,22 @@
             btnAbrirCadastro.UseVisualStyleBackColor = true;
             btnAbrirCadastro.Click += btnCadastro_Click;
             // 
+            // btnAbrirListagem
+            // 
+            btnAbrirListagem.Location = new Point(592, 94);
+            btnAbrirListagem.Name = "btnAbrirListagem";
+            btnAbrirListagem.Size = new Size(151, 45);
+            btnAbrirListagem.TabIndex = 1;
+            btnAbrirListagem.Text = "Ver Listagem";
+            btnAbrirListagem.UseVisualStyleBackColor = true;
+            btnAbrirListagem.Click += btnAbrirListagem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAbrirListagem);
             Controls.Add(btnAbrirCadastro);
             Name = "Form1";
             Text = "Form1";
@@ -56,5 +68,6 @@
         #endregion
 
         private Button btnAbrirCadastro;
+        private Button btnAbrirListagem;
     }
 }

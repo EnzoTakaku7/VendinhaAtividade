@@ -27,5 +27,13 @@ namespace Vendinha.Desktop
         {
 
         }
+
+        private void btnAbrirListagem_Click(object sender, EventArgs e)
+        {
+            if (service == null) { MessageBox.Show("Serviço de cliente não disponível."); return; }
+
+            var listagem = new ListarClientela(service);
+            listagem.ShowDialog(this);
+        }
     }
 }
