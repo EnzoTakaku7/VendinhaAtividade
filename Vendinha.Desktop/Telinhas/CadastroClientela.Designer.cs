@@ -31,7 +31,7 @@
             lblNome = new Label();
             txtNome = new TextBox();
             lblCPF = new Label();
-            textBox1 = new TextBox();
+            txtCPF = new TextBox();
             txtEmail = new TextBox();
             lblEmail = new Label();
             lblNascimento = new Label();
@@ -66,13 +66,13 @@
             lblCPF.TabIndex = 2;
             lblCPF.Text = "CPF:";
             // 
-            // textBox1
+            // txtCPF
             // 
-            textBox1.Location = new Point(32, 114);
-            textBox1.MaxLength = 11;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(201, 23);
-            textBox1.TabIndex = 3;
+            txtCPF.Location = new Point(32, 114);
+            txtCPF.MaxLength = 11;
+            txtCPF.Name = "txtCPF";
+            txtCPF.Size = new Size(201, 23);
+            txtCPF.TabIndex = 3;
             // 
             // txtEmail
             // 
@@ -116,6 +116,7 @@
             btnCadastrar.TabIndex = 9;
             btnCadastrar.Text = "Cadastrar\r\n";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // CadastroClientela
             // 
@@ -127,7 +128,7 @@
             Controls.Add(txtEmail);
             Controls.Add(lblEmail);
             Controls.Add(lblNascimento);
-            Controls.Add(textBox1);
+            Controls.Add(txtCPF);
             Controls.Add(lblCPF);
             Controls.Add(txtNome);
             Controls.Add(lblNome);
@@ -143,7 +144,7 @@
         private Label lblNome;
         private TextBox txtNome;
         private Label lblCPF;
-        private TextBox textBox1;
+        private TextBox txtCPF;
         private TextBox txtEmail;
         private Label lblEmail;
         private Label lblNascimento;

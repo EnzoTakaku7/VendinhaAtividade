@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnAbrirCadastro = new Button();
             SuspendLayout();
+            // 
+            // btnAbrirCadastro
+            // 
+            btnAbrirCadastro.Location = new Point(592, 29);
+            btnAbrirCadastro.Name = "btnAbrirCadastro";
+            btnAbrirCadastro.Size = new Size(151, 47);
+            btnAbrirCadastro.TabIndex = 0;
+            btnAbrirCadastro.Text = "Cadastrar Cliente";
+            btnAbrirCadastro.UseVisualStyleBackColor = true;
+            btnAbrirCadastro.Click += btnCadastro_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAbrirCadastro);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -42,5 +54,7 @@
         }
 
         #endregion
+
+        private Button btnAbrirCadastro;
     }
 }

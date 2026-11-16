@@ -11,7 +11,7 @@ namespace Vendinha.Negocio
 
         [Required(ErrorMessage = "O CPF é obrigatório.")]
         [StringLength(11, MinimumLength = 11)]
-        [RegularExpression("^[a-zA-Z ]+$")]
+        [RegularExpression(@"^[0-9]{11}$")]
         public string CPF { get; set; }
 
 
