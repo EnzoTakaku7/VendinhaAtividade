@@ -1,4 +1,5 @@
 ﻿using System;
+using Npgsql;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -145,6 +146,57 @@ namespace Vendinha.Dados.Serviços
         {
             return repositorio.ContarClientes(pesquisa);
         }
+
+
+        public bool Atualizar(Cliente cliente, out List<ValidationResult> erros)
+        {
+            if (!Validar(cliente, out erros)) { return false; }
+
+            if (cliente.Id <= 0)
+            {
+                erros.Add(new ValidationResult("O cliente informado é inválido."));
+                return false;
+            }
+
+            try
+            {
+                if (repositorio.Atualizar(cliente)) { return true; }
+
+                erros.Add(new ValidationResult("Cliente não encontrado."));
+                return false;
+            }
+            catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+            {
+                erros.Add(new ValidationResult("Já existe um cliente com esse CPF."));
+                return false;
+            }
+        }
+
+        public bool Excluir(int clienteId, out List<ValidationResult> erros)
+        {
+            erros = new List<ValidationResult>();
+
+            if (clienteId <= 0)
+            {
+                erros.Add(new ValidationResult("O cliente informado é inválido."));
+                return false;
+            }
+
+            try
+            {
+                if (repositorio.Excluir(clienteId)) { return true; }
+
+                erros.Add(new ValidationResult("Cliente não encontrado."));
+                return false;
+            }
+            catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.ForeignKeyViolation)
+            {
+                erros.Add(new ValidationResult("Não é possível excluir este cliente pois ele possui dívidas registradas."));
+                return false;
+            }
+        }
+
+
     }
-        
+
 }

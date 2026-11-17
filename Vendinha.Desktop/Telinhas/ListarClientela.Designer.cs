@@ -41,6 +41,8 @@
             btnAnterior = new Button();
             btnProximo = new Button();
             lblPagina = new Label();
+            btnEditarCliente = new Button();
+            btnExcluirCliente = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -51,8 +53,9 @@
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Columns.AddRange(new DataGridViewColumn[] { colId, colNome, ColCPF, ColNascimento, ColIdade, colEmail });
             dgvClientes.Location = new Point(76, 76);
+            dgvClientes.MultiSelect = false;
             dgvClientes.Name = "dgvClientes";
-            dgvClientes.ReadOnly = true;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(601, 300);
             dgvClientes.TabIndex = 0;
             dgvClientes.CellContentClick += dataGridView1_CellContentClick;
@@ -149,11 +152,33 @@
             lblPagina.Text = "Página 1";
             lblPagina.Click += label1_Click;
             // 
+            // btnEditarCliente
+            // 
+            btnEditarCliente.Location = new Point(691, 273);
+            btnEditarCliente.Name = "btnEditarCliente";
+            btnEditarCliente.Size = new Size(97, 38);
+            btnEditarCliente.TabIndex = 7;
+            btnEditarCliente.Text = "Editar Cliente";
+            btnEditarCliente.UseVisualStyleBackColor = true;
+            btnEditarCliente.Click += btnEditarCliente_Click;
+            // 
+            // btnExcluirCliente
+            // 
+            btnExcluirCliente.Location = new Point(691, 191);
+            btnExcluirCliente.Name = "btnExcluirCliente";
+            btnExcluirCliente.Size = new Size(97, 36);
+            btnExcluirCliente.TabIndex = 8;
+            btnExcluirCliente.Text = "Excluir Cliente";
+            btnExcluirCliente.UseVisualStyleBackColor = true;
+            btnExcluirCliente.Click += btnExcluirCliente_Click;
+            // 
             // ListarClientela
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnExcluirCliente);
+            Controls.Add(btnEditarCliente);
             Controls.Add(lblPagina);
             Controls.Add(btnProximo);
             Controls.Add(btnAnterior);
@@ -183,5 +208,7 @@
         private Button btnAnterior;
         private Button btnProximo;
         private Label lblPagina;
+        private Button btnEditarCliente;
+        private Button btnExcluirCliente;
     }
 }

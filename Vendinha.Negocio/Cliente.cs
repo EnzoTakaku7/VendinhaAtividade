@@ -48,5 +48,6 @@ namespace Vendinha.Negocio
             this.DataNascimento = dataNascimento;
         }
 
+        public decimal TotalDividaAberta { get; set; }
     }
 }

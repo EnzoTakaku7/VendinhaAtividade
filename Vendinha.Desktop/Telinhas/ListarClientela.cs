@@ -66,6 +66,7 @@ namespace Vendinha.Desktop.Telinhas
             {
                 dgvClientes.Rows.Add(cliente.Id, cliente.NomeCompleto, cliente.CPF, cliente.DataNascimento.ToString("dd/MM/yyyy"), cliente.Idade, cliente.Email);
             }
+            dgvClientes.ClearSelection();
         }
         public ListarClientela(ClienteSevice sevice) : this()
         {
@@ -101,5 +102,76 @@ namespace Vendinha.Desktop.Telinhas
             paginaAtual--;
             CarregarDados();
         }
+
+
+        private void btnEditarCliente_Click(object sender, EventArgs e)
+        {
+            if (sevice == null) { return; }
+
+            if (dgvClientes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um cliente para editar.");
+                return;
+            }
+
+            try
+            {
+                int clienteId = Convert.ToInt32(dgvClientes.SelectedRows[0].Cells["colId"].Value);
+
+                var clientes = sevice.Consultar();
+                var cliente = clientes.Find(c => c.Id == clienteId);
+
+                if (cliente == null)
+                {
+                    MessageBox.Show("Cliente não encontrado.");
+                    return;
+                }
+
+                var tela = new EditarClientela(sevice, cliente);
+
+                if (tela.ShowDialog(this) == DialogResult.OK) { CarregarDados(); }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao abrir a edição:\n" + ex.Message);
+            }
+        }
+
+
+        private void btnExcluirCliente_Click(object sender, EventArgs e)
+        {
+            if (sevice == null) { return; }
+
+            if (dgvClientes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um cliente para excluir.");
+                return;
+            }
+
+            int clienteId = Convert.ToInt32(dgvClientes.SelectedRows[0].Cells["colId"].Value);
+            var resposta = MessageBox.Show("Deseja realmente excluir este cliente?", "Confirmar exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resposta != DialogResult.Yes) { return; }
+
+            try
+            {
+                if (sevice.Excluir(clienteId, out var erros))
+                {
+                    MessageBox.Show("Cliente excluído com sucesso!");
+                    CarregarDados();
+                }
+                else
+                {
+                    string mensagens = "";
+                    foreach (var erro in erros) { mensagens += erro.ErrorMessage + "\n"; }
+                    MessageBox.Show(mensagens);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao excluir o cliente:\n" + ex.Message);
+            }
+        }
+
     }
 }
