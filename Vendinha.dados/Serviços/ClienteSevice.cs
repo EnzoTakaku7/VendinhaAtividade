@@ -136,6 +136,15 @@ namespace Vendinha.Dados.Serviços
             return resultado;
         }
 
+        public List<Cliente> ConsultarPaginando(string pesquisa, int pagina)
+        {
+            return repositorio.ConsultarPaginado(pesquisa, pagina);
+        }
+
+        public int ContarClientes(string pesquisa)
+        {
+            return repositorio.ContarClientes(pesquisa);
+        }
     }
         
 }

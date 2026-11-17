@@ -38,6 +38,9 @@
             lblPesquisa = new Label();
             txtPesquisa = new TextBox();
             btnPesquisar = new Button();
+            btnAnterior = new Button();
+            btnProximo = new Button();
+            lblPagina = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +50,7 @@
             dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Columns.AddRange(new DataGridViewColumn[] { colId, colNome, ColCPF, ColNascimento, ColIdade, colEmail });
-            dgvClientes.Location = new Point(76, 125);
+            dgvClientes.Location = new Point(76, 76);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.ReadOnly = true;
             dgvClientes.Size = new Size(601, 300);
@@ -116,11 +119,44 @@
             btnPesquisar.UseVisualStyleBackColor = true;
             btnPesquisar.Click += btnPesquisar_Click;
             // 
+            // btnAnterior
+            // 
+            btnAnterior.Location = new Point(217, 406);
+            btnAnterior.Name = "btnAnterior";
+            btnAnterior.Size = new Size(75, 23);
+            btnAnterior.TabIndex = 4;
+            btnAnterior.Text = "Anterior";
+            btnAnterior.UseVisualStyleBackColor = true;
+            btnAnterior.Click += btnAnterior_Click;
+            // 
+            // btnProximo
+            // 
+            btnProximo.Location = new Point(453, 406);
+            btnProximo.Name = "btnProximo";
+            btnProximo.Size = new Size(75, 23);
+            btnProximo.TabIndex = 5;
+            btnProximo.Text = "Proximo";
+            btnProximo.UseVisualStyleBackColor = true;
+            btnProximo.Click += btnProximo_Click;
+            // 
+            // lblPagina
+            // 
+            lblPagina.AutoSize = true;
+            lblPagina.Location = new Point(353, 410);
+            lblPagina.Name = "lblPagina";
+            lblPagina.Size = new Size(52, 15);
+            lblPagina.TabIndex = 6;
+            lblPagina.Text = "Página 1";
+            lblPagina.Click += label1_Click;
+            // 
             // ListarClientela
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblPagina);
+            Controls.Add(btnProximo);
+            Controls.Add(btnAnterior);
             Controls.Add(btnPesquisar);
             Controls.Add(txtPesquisa);
             Controls.Add(lblPesquisa);
@@ -144,5 +180,8 @@
         private Label lblPesquisa;
         private TextBox txtPesquisa;
         private Button btnPesquisar;
+        private Button btnAnterior;
+        private Button btnProximo;
+        private Label lblPagina;
     }
 }

@@ -15,6 +15,9 @@ namespace Vendinha.Desktop.Telinhas
     public partial class ListarClientela : Form
     {
         private readonly ClienteSevice? sevice;
+        private int paginaAtual = 1;
+        private const int quantidadePorPagina = 10;
+
         public ListarClientela()
         {
             InitializeComponent();
@@ -27,8 +30,26 @@ namespace Vendinha.Desktop.Telinhas
 
             try
             {
-                var clientes = sevice.Consultar();
+                string pesquisa = txtPesquisa.Text.Trim();
+                int totalClientes = sevice.ContarClientes(pesquisa);
+                int totalPaginas = (totalClientes + quantidadePorPagina - 1) / quantidadePorPagina;
+
+                if (totalPaginas == 0)
+                {
+                    totalPaginas = 1;
+                }
+
+                if (paginaAtual > totalPaginas)
+                {
+                    paginaAtual = totalPaginas;
+                }
+
+                var clientes = sevice.ConsultarPaginando(pesquisa, paginaAtual);
+
                 CarregarDadosTabela(clientes);
+                lblPagina.Text = "Página " + paginaAtual + " de " + totalPaginas;
+                btnAnterior.Enabled = paginaAtual > 1;
+                btnProximo.Enabled = paginaAtual < totalPaginas;
 
             }
             catch (Exception ex)
@@ -59,12 +80,26 @@ namespace Vendinha.Desktop.Telinhas
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (sevice == null) { return; }
-            
-            try { var resultado = sevice.Consultar(txtPesquisa.Text.Trim()); CarregarDadosTabela(resultado); }
-            catch (Exception ex) { MessageBox.Show("Ocorreu um erro ao pesquisar os dados:\n" + ex.Message); }
+            paginaAtual = 1;
+            CarregarDados();
+        }
 
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnProximo_Click(object sender, EventArgs e)
+        {
+            paginaAtual++;
+            CarregarDados();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            paginaAtual--;
+            CarregarDados();
         }
     }
 }

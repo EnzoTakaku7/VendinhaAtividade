@@ -65,5 +65,58 @@ namespace Vendinha.Dados.Repositorios
 
             return resultado;    
         }
+
+        public List<Cliente> ConsultarPaginado(string pesquisa, int pagina)
+        {
+            var resultado = new List<Cliente>();
+
+            if (pagina < 1) { pagina = 1; }
+            int offset = (pagina - 1) * 10;
+
+            using NpgsqlConnection conexao = _conexaoPostgres.ObterConexao();
+            conexao.Open();
+
+            string sql = @"SELECT id, nome_completo, cpf, data_nascimento, email FROM cliente WHERE POSITION(LOWER(@pesquisa) IN LOWER(nome_completo)) > 0 ORDER BY nome_completo LIMIT 10 OFFSET @offset";
+
+            using NpgsqlCommand comando = new NpgsqlCommand(sql, conexao);
+
+            comando.Parameters.AddWithValue("@pesquisa", pesquisa ?? "");
+            comando.Parameters.AddWithValue("@offset", offset);
+
+            using NpgsqlDataReader leitor = comando.ExecuteReader();
+
+            while (leitor.Read())
+            {
+                var cliente = new Cliente(
+                    leitor.GetString(1),
+                    leitor.GetString(2),
+                    leitor.GetDateTime(3)
+                );
+                cliente.Id = leitor.GetInt32(0);
+
+                if (!leitor.IsDBNull(4))
+                {
+                    cliente.Email = leitor.GetString(4);
+                }
+                resultado.Add(cliente);
+            }
+
+            return resultado;
+        }
+
+        
+        public int ContarClientes(string pesquisa)
+        {
+            using NpgsqlConnection conexao = _conexaoPostgres.ObterConexao();
+            conexao.Open();
+
+            string sql = @"SELECT COUNT(*) FROM cliente WHERE POSITION(LOWER(@pesquisa) IN LOWER(nome_completo)) > 0";
+
+            using NpgsqlCommand comando = new NpgsqlCommand(sql, conexao);
+
+            comando.Parameters.AddWithValue("@pesquisa", pesquisa ?? "");
+            
+            return Convert.ToInt32(comando.ExecuteScalar());
+        }
     }
 }
