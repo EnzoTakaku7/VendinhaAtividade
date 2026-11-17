@@ -29,7 +29,7 @@ namespace Vendinha.Desktop
             }
             
             ClienteSevice service;
-
+            DividaSevice dividasevice;
             try
             {
                 var conexao = new ConexaoPostgres(connectionString);
@@ -39,6 +39,9 @@ namespace Vendinha.Desktop
                 }
                 var repositorio = new ClienteRepositorio(conexao);
                 service = new ClienteSevice(repositorio);
+
+                var dividaRepositorio = new DividaRepositorio(conexao);
+                dividasevice = new DividaSevice(dividaRepositorio);
             }
 
             catch (Exception ex)
@@ -51,10 +54,11 @@ namespace Vendinha.Desktop
 
                 return;
             }
+            
 
            
 
-            Application.Run(new Form1(service));
+            Application.Run(new Form1(service, dividasevice));
         }
     }
 }

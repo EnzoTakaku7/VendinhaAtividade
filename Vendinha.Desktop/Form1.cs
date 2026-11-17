@@ -7,6 +7,7 @@ namespace Vendinha.Desktop
     public partial class Form1 : Form
     {
         private readonly ClienteSevice? service;
+        private readonly DividaSevice? dividaService;
 
         public Form1()
         {
@@ -14,6 +15,7 @@ namespace Vendinha.Desktop
         }
 
         public Form1(ClienteSevice service) : this() { this.service = service; }
+        public Form1(ClienteSevice service, DividaSevice dividaService) : this(service) { this.dividaService = dividaService; }
 
         public void btnCadastro_Click(object sender, EventArgs e)
         {
@@ -34,6 +36,22 @@ namespace Vendinha.Desktop
 
             var listagem = new ListarClientela(service);
             listagem.ShowDialog(this);
+        }
+
+        private void btnCadastrarDivida_Click(object sender, EventArgs e)
+        {
+            if (service == null || dividaService == null) { return; }
+
+            var tela = new CadastroDivida(service, dividaService);
+            tela.ShowDialog(this);
+        }
+
+        private void btnListarDividas_Click(object sender, EventArgs e)
+        {
+            if (service == null || dividaService == null) { return; }
+
+            var tela = new ListarDividas(service, dividaService);
+            tela.ShowDialog(this);
         }
     }
 }
