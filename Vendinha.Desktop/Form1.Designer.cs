@@ -36,7 +36,7 @@
             // 
             // btnAbrirCadastro
             // 
-            btnAbrirCadastro.Location = new Point(592, 29);
+            btnAbrirCadastro.Location = new Point(31, 94);
             btnAbrirCadastro.Name = "btnAbrirCadastro";
             btnAbrirCadastro.Size = new Size(151, 47);
             btnAbrirCadastro.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // btnAbrirListagem
             // 
-            btnAbrirListagem.Location = new Point(592, 94);
+            btnAbrirListagem.Location = new Point(226, 96);
             btnAbrirListagem.Name = "btnAbrirListagem";
             btnAbrirListagem.Size = new Size(151, 45);
             btnAbrirListagem.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // btnCadastrarDivida
             // 
-            btnCadastrarDivida.Location = new Point(592, 162);
+            btnCadastrarDivida.Location = new Point(425, 97);
             btnCadastrarDivida.Name = "btnCadastrarDivida";
             btnCadastrarDivida.Size = new Size(155, 45);
             btnCadastrarDivida.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // btnListarDividas
             // 
-            btnListarDividas.Location = new Point(592, 226);
+            btnListarDividas.Location = new Point(614, 98);
             btnListarDividas.Name = "btnListarDividas";
             btnListarDividas.Size = new Size(151, 44);
             btnListarDividas.TabIndex = 3;
